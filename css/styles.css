@@ -1,0 +1,89 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #e8e8e8;
+}
+
+
+.header__title {
+    color: #914557;
+}
+
+.header__wrapper {
+    border-top: 5px solid #742334;
+    border-bottom: 5px solid #742334;
+    border-radius: 20px;
+}
+
+/* Movies start */
+
+.movies__img {
+    width: 100%;
+    height: 150px;
+    border-radius: 6px;
+}
+
+.movies__item {
+    max-width: 300px;
+    width: 100%;
+    padding: 25px 15px;
+    border: 1px solid #3b3b3b;
+    border-radius: 6px;
+    background-color: #11110f;
+    box-shadow: 0 0 15px 0 #494747;
+    cursor: pointer;
+}
+
+.movies__title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #742334;
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movies__span {
+    color: #898787;
+    font-weight: bold;
+}
+
+.movies__rating {
+    position: relative;
+}
+
+.movies__rating::before {
+    background-image: url("../images/star.svg");
+    background-repeat: no-repeat;
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+    content: "";
+}
+
+.movies__year::before {
+    background-image: url("../images/date.svg");
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+    content: "";
+}
+
+.movies__runtime::before {
+    background-image: url("../images/clock.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    content: "";
+}
+
+.movies__categorie {
+    color:#aaa7a7;
+    font-weight: 500;
+}
+/* Movies end */

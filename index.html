@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    
+    <!-- header start -->
+    
+    <header class="header mb-5">
+        <div class="container">
+            <div class="header__wrapper mt-4 mb-5 py-2">
+                <h1 class="header__title m-0 text-center fw-bold">Movies</h1>
+            </div>
+            
+            <!-- Form start -->
+            
+            <form  class="movies__form">
+                <div class="d-md-flex">
+                    <input type="search" class="movies__search form-control mb-3 me-4 mb-md-0" placeholder="Movies search ...">
+                    <select class="movies__categories form-select  mb-3 me-4 mb-md-0">
+                        <option value="All">All</option>
+                    </select>
+                    <input class="form-control movies__minyear me-3" type="text" maxlength = "4"  placeholder="Min year">
+                    <input class="form-control movies__maxyear me-3" type="text" maxlength="4"  placeholder="Max year">
+                    <select class="form-select movies__sort me-3" aria-label="Default select example">
+                        <option hidden>Sort Movies</option>
+                        <option value="a-z">A-Z</option>
+                        <option value="z-a">Z-A</option>
+                        <option value="10-1">10-1</option>
+                        <option value="1-10">1-10</option>
+                        <option value="2018-2000">Max-year 2018-2000</option>
+                        <option value="2000-2018">Min-year 2000-2018</option>
+                    </select>
+                    <button class="btn btn-success px-4">Send</button>
+                </div>
+            </form>
+            
+            <!-- Form end -->
+        </div>
+    </header>
+    
+    <!-- Header end -->
+    
+    
+    <!-- Movies section start -->
+    
+    <main>
+        
+        <section class="movies">
+            <div class="container">
+                <ul class="row movies__list justify-content-between list-unstyled ps-0">
+                    
+                </ul>
+            </div>
+        </section>
+        
+    </main>
+    
+    <!-- Movies section end -->
+    
+    <!-- Modal start -->
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content pt-4 pe-4 pb-1 ps-4 bg-dark">
+                <div class="row mb-4">
+                    <div class="col-12 col-lg-5">
+                        <h2 class="modal__title text-white mb-4"></h2>
+                        <iframe class="modal__iframe rounded-1 mb-4 mb-lg-2" width="400" height="250"></iframe>
+                    </div>
+                    <div class="col-12 col-lg-7">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <span class="modal__rating movies__rating d-flex text-white"></span>
+                            <span class="modal__year movies__year d-flex text-white"></span>
+                            <span class="modal__runtime movies__runtime d-flex text-white"></span>
+                        </div>
+                        <p class="modal__categoriya text-white opacity-75 mb-4"></p>
+                        <p class="modal__summary text-white opacity-75"></p>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-between">
+                        <a class="modal__link">IMDb.com</a>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal end -->
+    
+    
+    
+    <!-- Template start -->
+    
+    <template class="movies__temp">
+        
+        <li class="movies__item d-flex flex-column justify-content-between mb-4  mx-auto mx-md-0 col-12 col-md-6 col-lg-4">
+            <img  class="movies__img mb-3">
+            <h3 class="movies__title mb-4"></h3>
+            <div class="movies__span d-flex justify-content-between align-items-center mb-3">
+                <span class="movies__rating d-flex"></span>
+                <span class="movies__year d-flex"></span>
+                <span class="movies__runtime d-flex"></span>
+            </div>
+            <p class="movies__categorie text-center"></p>
+            <button class="movies__btn btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Movie info</button>
+        </li>
+        
+    </template>
+    
+    <!-- Template end -->
+    
+    <!-- Javascript start -->
+    
+    <script src="js/movies.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    
+</body>
+</html>
