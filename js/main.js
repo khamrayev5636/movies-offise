@@ -19,6 +19,16 @@ const modalCategoria = document.querySelector(".modal__categoriya");
 const modalSummary = document.querySelector(".modal__summary");
 const modalLink = document.querySelector(".modal__link");
 
+// Bookmark start
+const elBookmarkList = document.querySelector(".bookmark__list");
+const elBookmarkBtn = document.querySelector(".bookmark-btn");
+const elBookmarks = document.querySelector(".bookmakrs")
+const bookmarks = [];
+
+// elBookmarks.addEventListener("click" , evt => {
+//     elBookmarkBtn.classList.toggle("bookmark-btn--js")
+// })
+
 // Time function 
 
 function getTime(time) {
@@ -31,7 +41,8 @@ function getTime(time) {
 
 // Render Movies Function
 
-function renderMovies(item){
+function renderMovies(item , regex = ""){
+    
     
     elMoviesList.innerHTML = ""; 
     
@@ -44,12 +55,19 @@ function renderMovies(item){
         
         elCloneMovies.querySelector(".movies__img").src = element.poster_min;
         elCloneMovies.querySelector(".movies__img").alt = element.title;
-        elCloneMovies.querySelector(".movies__title").textContent = element.title;
+        
+        if(regex.source != "(?:)" && regex){
+            elCloneMovies.querySelector(".movies__title").innerHTML = element.title.replace(regex , `<mark class="bg-warning rounded">${regex.source.toLowerCase()}</mark>` );
+        }else {
+            elCloneMovies.querySelector(".movies__title").textContent = element.title;
+        }
+        
         elCloneMovies.querySelector(".movies__rating").textContent = element.imdb_rating;
         elCloneMovies.querySelector(".movies__year").textContent = element.movie_year;
         elCloneMovies.querySelector(".movies__runtime").textContent = getTime(element.runtime);
         elCloneMovies.querySelector(".movies__categorie").textContent = element.categories.join("  ");
         elCloneMovies.querySelector(".movies__btn").dataset.id = element.imdb_id;
+        elCloneMovies.querySelector(".bookmark-btn").dataset.bookmarkId = element.imdb_id;
         
         elFragmentMovies.appendChild(elCloneMovies);
     });
@@ -123,7 +141,7 @@ function moviesSort(movieSort , value) {
             
         });  
     }
-
+    
     if(value == "z-a"){
         
         movieSort.sort((a , b) => {
@@ -138,22 +156,58 @@ function moviesSort(movieSort , value) {
             
         });  
     }
-
+    
+    // Movies rating sort 
     if(value === "10-1"){
         movieSort.sort((a,b) => b.imdb_rating - a.imdb_rating)
     }
-
+    
     if(value === "1-10"){
         movieSort.sort((a,b) => a.imdb_rating - b.imdb_rating)
     }
-
+    
+    // Movies year sort
     if(value === "2018-2000") {
         movieSort.sort((a,b) => b.movie_year - a.movie_year)
     }
-
+    
     if(value === "2000-2018") {
         movieSort.sort((a,b) => a.movie_year - b.movie_year)
     }
+    
+}
+
+// Bookmark function start
+
+function addBookmark(arr , node) {
+    
+    elBookmarkList.innerHTML = ""
+    
+    const elTemplateMovies = document.querySelector(".movies__temp").content;
+    const elFragmentMovies = document.createDocumentFragment();
+    
+    arr.forEach((element , index) => {
+        
+        const elCloneMovies = elTemplateMovies.cloneNode(true);
+        
+        elCloneMovies.querySelector(".movies__img").src = element.poster_min;
+        elCloneMovies.querySelector(".movies__img").alt = element.title;
+        elCloneMovies.querySelector(".movies__title").textContent = element.title;
+        elCloneMovies.querySelector(".movies__rating").textContent = element.imdb_rating;
+        elCloneMovies.querySelector(".movies__year").textContent = element.movie_year;
+        elCloneMovies.querySelector(".movies__runtime").textContent = getTime(element.runtime);
+        elCloneMovies.querySelector(".movies__categorie").textContent = element.categories.join("  ");
+        elCloneMovies.querySelector(".movies__btn").classList.add("d-none");
+        elCloneMovies.querySelector(".bookmark-btn").dataset.bookmarkId = element.imdb_id;
+        elCloneMovies.querySelector(".bookmark-btn").classList.add("visually-hidden");
+        elCloneMovies.querySelector(".bookmark-delete").dataset.bookmarkId = element.imdb_id;
+        elCloneMovies.querySelector(".bookmark-delete").classList.remove("visually-hidden");
+        
+        
+        elFragmentMovies.appendChild(elCloneMovies);
+    });
+    
+    node.appendChild(elFragmentMovies);
     
 }
 
@@ -169,7 +223,41 @@ elMoviesList.addEventListener("click" , evt => {
         
         renderModal(findModal);
     }
+    
+    if(evt.target.matches(".bookmark-btn")){
+        
+        const bookmarkId = evt.target.dataset.bookmarkId;
+        const findBookmark = fullMovies.find(element => element.imdb_id === bookmarkId);
+        
+        if(!bookmarks.includes(findBookmark)) {
+            
+            bookmarks.push(findBookmark)
+            
+            addBookmark(bookmarks , elBookmarkList)
+            
+        }
+    }
 });
+
+// Bookmark Event delegation
+
+elBookmarkList.addEventListener("click" , evt => {
+    
+    if(evt.target.matches(".bookmark-delete")){
+        
+        const deleteBookmark = evt.target.dataset.bookmarkId;
+        
+        const deleteBookmarkFind = bookmarks.findIndex((item) => {
+           return  item.imdb_id  == deleteBookmark
+        })  
+        
+        bookmarks.splice(deleteBookmarkFind , 1);
+        
+        addBookmark(bookmarks , elBookmarkList)
+        
+    }
+    
+})
 
 // Elform start
 
@@ -191,9 +279,9 @@ elForm.addEventListener("submit" , evt => {
     
     if(moviesFilter.length > 0){
         moviesSort(moviesFilter , elSort)
-        renderMovies(moviesFilter);
+        renderMovies(moviesFilter , moviesRegex);
     }else {
-        alert("Not Found 404 !!!!")
+        elMoviesList.textContent = "Not Found 404";
     }
     
 })

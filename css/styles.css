@@ -2,11 +2,13 @@ body {
     font-family: sans-serif;
     margin: 0;
     background-color: #e8e8e8;
+    overflow-x: hidden;
 }
 
 
 .header__title {
     color: #914557;
+    text-transform: uppercase;
 }
 
 .header__wrapper {
@@ -86,4 +88,56 @@ body {
     color:#aaa7a7;
     font-weight: 500;
 }
+
+/* Bookmarm start */
+
+.bookmark__box {
+    position: absolute;
+    top: 50px;
+    left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    background-color:  #e8e8e8;
+    box-shadow: 0 0 5px black;
+    border-radius: 50%;
+}
+
+.bookmark {
+    width: 30px;
+    height: 35px;
+    background-image: url("../images/bookmark-regular.svg");
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+}
+
+.bookmark-btn {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.bookmark-btn::before {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+    background-image: url("../images/bookmark-regular.svg");
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    content: "";
+}
+
+.bookmark-btn:focus:before {
+    background-image: url("../images/bookmark-solid.svg");
+}
+
+/* Bookmarm end */
 /* Movies end */

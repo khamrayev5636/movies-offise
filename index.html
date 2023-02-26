@@ -22,13 +22,16 @@
             
             <form  class="movies__form">
                 <div class="d-md-flex">
+                    <div class="bookmark__box">
+                        <button class="bookmark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"></button>
+                    </div>
                     <input type="search" class="movies__search form-control mb-3 me-4 mb-md-0" placeholder="Movies search ...">
                     <select class="movies__categories form-select  mb-3 me-4 mb-md-0">
                         <option value="All">All</option>
                     </select>
-                    <input class="form-control movies__minyear me-3" type="text" maxlength = "4"  placeholder="Min year">
-                    <input class="form-control movies__maxyear me-3" type="text" maxlength="4"  placeholder="Max year">
-                    <select class="form-select movies__sort me-3" aria-label="Default select example">
+                    <input class="form-control movies__minyear me-3 mb-3 mb-md-0" type="text" maxlength = "4"  placeholder="Min year">
+                    <input class="form-control movies__maxyear me-3 mb-3 mb-md-0" type="text" maxlength="4"  placeholder="Max year">
+                    <select class="form-select movies__sort me-3 mb-3 mb-md-0" aria-label="Default select example">
                         <option hidden>Sort Movies</option>
                         <option value="a-z">A-Z</option>
                         <option value="z-a">Z-A</option>
@@ -42,6 +45,18 @@
             </form>
             
             <!-- Form end -->
+            
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title fs-1" id="offcanvasRightLabel">Bookmark</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="bookmark__list">
+
+                    </ul>
+                </div>
+            </div>
         </div>
     </header>
     
@@ -109,7 +124,11 @@
                 <span class="movies__runtime d-flex"></span>
             </div>
             <p class="movies__categorie text-center"></p>
-            <button class="movies__btn btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Movie info</button>
+            <div class="bookmakrs d-flex align-items-center">
+                <button class="movies__btn btn btn-success w-75 me-3" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Movie info</button>
+                <button class="bookmark-btn" type="button"></button>
+                <button class="btn btn-danger bookmark-delete w-100 visually-hidden" type="button">Delete from bookmark</button>
+            </div>
         </li>
         
     </template>
